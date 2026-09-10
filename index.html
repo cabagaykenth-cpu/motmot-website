@@ -10,8 +10,9 @@
 
     <title>For You ❤️</title>
 
-    <link rel="stylesheet"href="style.css">
-    <script src="j.js"></script>
+    <link rel="stylesheet"
+          href="style.css">
+          <script src="j.js"></script>
 
 </head>
 
@@ -19,6 +20,9 @@
 <body>
 
 
+<!-- =====================================================
+     FLOATING DECORATIONS
+     ===================================================== -->
 
 <div class="decorations">
 
@@ -59,7 +63,7 @@
         </p>
 
 
-        <!-- 6 DIGIT PASSCODE DISPLAY -->
+        <!-- 6 DIGIT PASSCODE -->
 
         <div class="code-display">
 
@@ -144,7 +148,9 @@
 <div id="mainWebsite" class="hidden">
 
 
-    <!-- HEADER -->
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
 
     <header>
 
@@ -719,30 +725,39 @@
 
 
 
-            <!-- MUSIC -->
+            <!-- =================================================
+                 MUSIC PLAYER
+                 ================================================= -->
 
-            <audio id="music">
+            <audio id="music" preload="metadata">
 
-                <source src="music.mp3"
-                        type="audio/mpeg">
+                <source
+                    src="Libu Libong Buwan Uuwian Kyle Raphael Lyric Video.mp3"
+                    type="audio/mpeg">
+
+                Your browser does not support audio.
 
             </audio>
 
 
-
             <div class="music-buttons">
 
-                <button onclick="playMusic()">
+                <button type="button"
+                        onclick="playMusic()">
+
                     ▶ Play
+
                 </button>
 
 
-                <button onclick="pauseMusic()">
+                <button type="button"
+                        onclick="pauseMusic()">
+
                     ❚❚ Pause
+
                 </button>
 
             </div>
-
 
 
             <div class="music-bar">
@@ -754,9 +769,8 @@
 
             <p class="song-hint">
 
-                Put your own
-                <b>music.mp3</b>
-                inside this folder.
+                Make sure the MP3 file is uploaded
+                in the same folder as index.html.
 
             </p>
 
@@ -797,7 +811,9 @@
 
 
 
-<!-- JAVASCRIPT -->
+<!-- =====================================================
+     JAVASCRIPT
+     ===================================================== -->
 
 <script src="script.js"></script>
 

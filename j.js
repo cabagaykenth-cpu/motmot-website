@@ -5,7 +5,7 @@
 
 /* ================= PASSCODE ================= */
 
-// CHANGE YOUR PASSWORD HERE
+// YOUR PASSWORD
 const SECRET_PASSCODE = "081526";
 
 let enteredCode = "";
@@ -13,7 +13,7 @@ let enteredCode = "";
 
 function pressKey(number) {
 
-    // Maximum of 6 digits
+    // Maximum 6 digits
     if (enteredCode.length >= 6) {
         return;
     }
@@ -22,7 +22,7 @@ function pressKey(number) {
 
     updateDots();
 
-    // Check password after 6 digits
+    // Check after 6 digits
     if (enteredCode.length === 6) {
         setTimeout(checkPassword, 200);
     }
@@ -31,24 +31,29 @@ function pressKey(number) {
 
 function deleteKey() {
 
-    enteredCode =
-        enteredCode.slice(0, -1);
+    enteredCode = enteredCode.slice(0, -1);
 
     updateDots();
 
-    document.getElementById(
-        "wrongPassword"
-    ).textContent = "";
+    const wrongPassword =
+        document.getElementById("wrongPassword");
+
+    if (wrongPassword) {
+        wrongPassword.textContent = "";
+    }
 }
 
 
 function updateDots() {
 
-    // Update all 6 dots
     for (let i = 1; i <= 6; i++) {
 
         const dot =
             document.getElementById("dot" + i);
+
+        if (!dot) {
+            continue;
+        }
 
         if (i <= enteredCode.length) {
             dot.classList.add("filled");
@@ -79,8 +84,10 @@ function checkPassword() {
 
     } else {
 
-        wrongPassword.textContent =
-            "Wrong passcode. Try again ❤️";
+        if (wrongPassword) {
+            wrongPassword.textContent =
+                "Wrong passcode. Try again ❤️";
+        }
 
         enteredCode = "";
 
@@ -111,6 +118,7 @@ function showSection(sectionName) {
         selected.classList.add("active");
 
     }
+
 
     window.scrollTo({
         top: 0,
@@ -157,14 +165,21 @@ if (days < 0) {
 }
 
 
-document.getElementById(
-    "months"
-).textContent = months;
+const monthsElement =
+    document.getElementById("months");
+
+const daysElement =
+    document.getElementById("days");
 
 
-document.getElementById(
-    "days"
-).textContent = days;
+if (monthsElement) {
+    monthsElement.textContent = months;
+}
+
+
+if (daysElement) {
+    daysElement.textContent = days;
+}
 
 
 /* ================= PHOTO GALLERY ================= */
@@ -189,6 +204,11 @@ function previewImage(event, number) {
         document.getElementById(
             "text" + number
         );
+
+
+    if (!image || !text) {
+        return;
+    }
 
 
     const reader =
@@ -218,40 +238,98 @@ const music =
     document.getElementById("music");
 
 const progress =
-    document.getElementById(
-        "musicProgress"
-    );
+    document.getElementById("musicProgress");
 
 
 function playMusic() {
 
-    music.play();
+    if (!music) {
+        alert("Music player not found.");
+        return;
+    }
+
+
+    music.play()
+        .then(function() {
+
+            console.log(
+                "Music is playing."
+            );
+
+        })
+        .catch(function(error) {
+
+            console.log(
+                "Music error:",
+                error
+            );
+
+            alert(
+                "Hindi ma-play ang music. " +
+                "Siguraduhing uploaded ang MP3 file sa GitHub."
+            );
+
+        });
+
 }
 
 
 function pauseMusic() {
 
+    if (!music) {
+        return;
+    }
+
     music.pause();
 }
 
 
-music.addEventListener(
-    "timeupdate",
-    function() {
+/* MUSIC PROGRESS */
 
-        if (!music.duration) {
-            return;
+if (music && progress) {
+
+    music.addEventListener(
+        "timeupdate",
+        function() {
+
+            if (!music.duration) {
+                return;
+            }
+
+            const percentage =
+                (music.currentTime /
+                music.duration) * 100;
+
+            progress.style.width =
+                percentage + "%";
+
         }
+    );
 
-        const percentage =
-            (music.currentTime /
-            music.duration) * 100;
 
-        progress.style.width =
-            percentage + "%";
+    music.addEventListener(
+        "ended",
+        function() {
 
-    }
-);
+            progress.style.width =
+                "0%";
+
+        }
+    );
+
+
+    music.addEventListener(
+        "error",
+        function() {
+
+            console.log(
+                "Unable to load music file."
+            );
+
+        }
+    );
+
+}
 
 
 /* ================= KEYBOARD PASSCODE ================= */
@@ -260,13 +338,18 @@ document.addEventListener(
     "keydown",
     function(event) {
 
-        if (
+        const lockScreen =
             document.getElementById(
                 "lockScreen"
-            ).style.display !== "none"
+            );
+
+
+        if (
+            lockScreen &&
+            lockScreen.style.display !== "none"
         ) {
 
-            // Allow numbers 0-9
+            // Numbers 0-9
             if (
                 event.key >= "0" &&
                 event.key <= "9"
@@ -277,7 +360,7 @@ document.addEventListener(
             }
 
 
-            // Allow Backspace
+            // Backspace
             if (
                 event.key === "Backspace"
             ) {
