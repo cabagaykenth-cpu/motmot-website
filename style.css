@@ -22,7 +22,7 @@ body::before {
     content: "";
     position: fixed;
     inset: 0;
-    background-image: url("../image.png");
+    background-image: url("./image.png");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -637,6 +637,73 @@ nav button:hover {
 }
 
 
+/* =====================================================
+   LETTER DECORATIVE PHOTOS
+   ===================================================== */
+
+.letter {
+    position: relative;
+    overflow: visible;
+}
+
+.letter-decorations {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.letter-photo {
+    position: absolute;
+    width: 115px;
+    height: 115px;
+    object-fit: cover;
+    padding: 6px;
+    background: white;
+    border: 1px solid #efd5dc;
+    border-radius: 5px;
+    box-shadow:
+        0 8px 20px rgba(80, 40, 50, 0.18);
+    transition: 0.3s ease;
+}
+
+
+/* LEFT PHOTO */
+
+.photo-left {
+    left: -105px;
+    top: 190px;
+    transform: rotate(-7deg);
+}
+
+
+/* UPPER RIGHT PHOTO */
+
+.photo-right-top {
+    right: -105px;
+    top: -30px;
+    transform: rotate(6deg);
+}
+
+
+/* LOWER RIGHT PHOTO */
+
+.photo-right-bottom {
+    right: -105px;
+    bottom: -40px;
+    transform: rotate(-5deg);
+}
+
+
+/* PHOTO HOVER */
+
+.letter-photo:hover {
+    transform: scale(1.05) rotate(0deg);
+    box-shadow:
+        0 12px 28px rgba(80, 40, 50, 0.25);
+}
+
+
 /* ================= GALLERY ================= */
 
 .gallery-section {
@@ -703,18 +770,12 @@ nav button:hover {
     overflow: hidden;
 }
 
-/* ================= FIXED PHOTO IMAGE ================= */
-
 .photo-frame img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-
-    /* FIX: image is now visible automatically */
     display: block;
-
     cursor: zoom-in;
-
     transition: transform 0.3s ease;
 }
 
@@ -1312,4 +1373,59 @@ nav button:hover {
         max-height: 80vh;
         border-width: 8px;
     }
+}
+
+
+/* =====================================================
+   DECORATIVE LETTER PHOTOS - MOBILE POSITION
+   ===================================================== */
+
+@media (max-width: 900px) {
+
+    .letter-photo {
+        width: 85px;
+        height: 85px;
+    }
+
+    .photo-left {
+        left: -55px;
+        top: 180px;
+    }
+
+    .photo-right-top {
+        right: -55px;
+        top: -25px;
+    }
+
+    .photo-right-bottom {
+        right: -55px;
+        bottom: -30px;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .letter-photo {
+        width: 65px;
+        height: 65px;
+        padding: 4px;
+    }
+
+    .photo-left {
+        left: -25px;
+        top: 150px;
+    }
+
+    .photo-right-top {
+        right: -20px;
+        top: -20px;
+    }
+
+    .photo-right-bottom {
+        right: -20px;
+        bottom: -20px;
+    }
+
 }
